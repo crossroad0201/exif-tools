@@ -104,7 +104,13 @@ Command line tools for manipulate Exif(Exchangeable image file format) informati
 ]
  ```
 
-## References
+## Insert Exif overlay to the image
+
+```
+./overlay-exif.py [DIR|FILE]
+```
+
+# References
 
 * https://github.com/karaage0703/python-image-processing/blob/master/photo_exif_date_print.py
 * http://cachu.xrea.jp/perl/ExifTAG.html
