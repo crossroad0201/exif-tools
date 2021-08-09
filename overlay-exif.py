@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
+import argparse
 import glob
 import os
-import sys
 
 import cv2
 import numpy as np
@@ -34,10 +34,10 @@ def __insert_text_to_image(image_file_path, insert_text):
     return output_img
 
 
-def __insert_exif_overlay_to_image(image_file_path):
+def __insert_exif_overlay_to_image(image_file_path, debug_print):
     print("Processing %s..." % image_file_path)
 
-    filename_and_exif = exifutils.get_exif_as_dict(image_file_path)
+    filename_and_exif = exifutils.get_exif_as_dict(image_file_path, debug_print)
     exif_info = filename_and_exif.get("Exif")
 
     if exif_info:
@@ -76,18 +76,18 @@ f/%(FNum)s %(ExposureTime)s %(FocalLength)smm ISO:%(ISO)s ExBias:%(ExposureBiasV
         cv2.imwrite(output_file_path, output_image)
         print("Done.")
     else:
-        print("Skipped")
+        print("Exif information not included. Skipped.")
 
 
 if __name__ == '__main__':
-    param = sys.argv
-    path_for_file_or_dir = param[1]
+    arg_parser = argparse.ArgumentParser(description="Show Exif information of specified image file.")
+    arg_parser.add_argument('input_path', type=str, help="Path for input image file or directory.")
+    arg_parser.add_argument('--debug', action='store_true', help="Print debug information.")
+    args = arg_parser.parse_args()
 
-    result = None
-    if os.path.isfile(path_for_file_or_dir):
-        __insert_exif_overlay_to_image(path_for_file_or_dir)
+    if os.path.isfile(args.input_path):
+        __insert_exif_overlay_to_image(args.input_path, debug_print=args.debug)
     else:
-        result = []
-        for path_for_file in glob.glob(path_for_file_or_dir + "/*"):
-            __insert_exif_overlay_to_image(path_for_file)
+        for path_for_file in glob.glob(args.input_path + "/*"):
+            __insert_exif_overlay_to_image(path_for_file, debug_print=args.debug)
             print("")
