@@ -42,22 +42,22 @@ def __insert_exif_overlay_to_image(image_file_path, debug_print, output_dir=None
 
     if exif_info:
         # TODO Configurable overlay.
-        exif_text = \
-            """
-f/%(FNum)s %(ExposureTime)s %(FocalLength)smm ISO:%(ISO)s ExBias:%(ExposureBiasValue)s SS:%(ShutterSpeed)s
+        exif_text = """
+f/%(FNumber)s %(ExposureTime)s %(FocalLength)smm ISO:%(ISOSpeedRatings)s ExBias:%(ExposureBiasValue)s SS:%(ShutterSpeedValue)s
 %(Make)s %(Model)s (%(LensMake)s %(LensModel)s)
-%(Timestamp)s""" % {
+%(DateTimeOriginal)s
+            """.strip() % {
                 'ExposureBiasValue': exif_info.get('ExposureBiasValue'),
                 'ExposureTime': "1/%s" % round(1 / exif_info.get('ExposureTime')),
-                'FNum': exif_info.get('FNumber'),
+                'FNumber': exif_info.get('FNumber'),
                 'FocalLength': exif_info.get('FocalLength'),
-                'ISO': exif_info.get('ISOSpeedRatings'),
+                'ISOSpeedRatings': exif_info.get('ISOSpeedRatings'),
                 'LensMake': exif_info.get('LensMake'),
                 'LensModel': exif_info.get('LensModel'),
                 'Make': exif_info.get('Make'),
                 'Model': exif_info.get('Model'),
-                'ShutterSpeed': exif_info.get('ShutterSpeedValue'),  # TODO math.log2(exif_info.get('ShutterSpeedValue')),
-                'Timestamp': exif_info.get('DateTimeOriginal'), # TODO to Local time.
+                'ShutterSpeedValue': exif_info.get('ShutterSpeedValue'),  # TODO math.log2(exif_info.get('ShutterSpeedValue')),
+                'DateTimeOriginal': exif_info.get('DateTimeOriginal'), # TODO to Local time.
             }
         print("--- Exif info ---")
         print("%s" % exif_text)
