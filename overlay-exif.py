@@ -21,12 +21,23 @@ def __insert_text_to_image(image_file_path, insert_text):
     txt = Image.new('RGB', base_img.size, (0, 0, 0))
     draw = ImageDraw.Draw(txt)
     # TODO Specify Font file
-    fnt = ImageFont.truetype('/Library/Fonts/Arial Black.ttf', size=(int)((base_img.size[0]+base_img.size[1])/150))
+    fnt = ImageFont.truetype(
+        '/Library/Fonts/Arial Black.ttf',
+        size=(int)((base_img.size[0]+base_img.size[1])/150)
+    )
 
     textw, texth = draw.textsize(insert_text, font=fnt)
 
-    draw.text(((base_img.size[0]*0.95 - textw) , (base_img.size[1]*0.95 - texth)),
-              insert_text, font=fnt, fill=font_color)
+    draw.text(
+        (
+            (base_img.size[0]*0.95 - textw),
+            (base_img.size[1]*0.95 - texth)
+        ),
+        insert_text,
+        font=fnt,
+        fill=font_color,
+        align='right'
+    )
 
     txt_array = np.array(txt)
 
@@ -43,9 +54,9 @@ def __insert_exif_overlay_to_image(image_file_path, debug_print, output_dir=None
     if exif_info:
         # TODO Configurable overlay.
         exif_text = """
+%(DateTimeOriginal)s
 f/%(FNumber)s %(ExposureTime)s %(FocalLength)smm ISO:%(ISOSpeedRatings)s ExBias:%(ExposureBiasValue)s SS:%(ShutterSpeedValue)s
 %(Make)s %(Model)s (%(LensMake)s %(LensModel)s)
-%(DateTimeOriginal)s
             """.strip() % {
                 'ExposureBiasValue': exif_info.get('ExposureBiasValue'),
                 'ExposureTime': "1/%s" % round(1 / exif_info.get('ExposureTime')),
