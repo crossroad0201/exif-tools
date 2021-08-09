@@ -75,15 +75,17 @@ f/%(FNumber)s %(ExposureTime)s %(FocalLength)smm ISO:%(ISOSpeedRatings)s ExBias:
         print("-----------------")
         output_image = __insert_text_to_image(image_file_path, exif_text)
 
-        # TODO Configurable output path.
         output_dir = output_dir if output_dir else os.path.dirname(image_file_path)
+
+        # Add suffix to file name. foo-bar.jpg -> foo-bar_exif.jpg
         index_of_file_ext = os.path.basename(image_file_path).rindex(".")
         file_name_without_file_ext = os.path.basename(image_file_path)[:index_of_file_ext]
         file_ext = os.path.splitext(image_file_path)[1]
         output_file_name = "%s%s%s" % (file_name_without_file_ext, output_file_name_suffix, file_ext)
-        output_file_path = os.path.join(output_dir, output_file_name)
 
+        output_file_path = os.path.join(output_dir, output_file_name)
         print("Output new image file to %s..." % output_file_path)
+
         cv2.imwrite(output_file_path, output_image)
         print("Done.")
     else:
