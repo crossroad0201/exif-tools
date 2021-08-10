@@ -30,6 +30,7 @@ Features...
 ```
 > pip install pillow
 > pip install opencv-python
+> pip install pyyaml
 ```
 
 # Usage
@@ -83,6 +84,16 @@ Insert Exif information to the image file as an overlay.
 ```
 > ./overlay-exif.py [--help] [DIR|FILE] [OPTIONS]
 ```
+
+# Configuration
+
+See [config.yaml](config.yaml).
+
+You can specify any configuration file using '--config' option.
+
+```
+> ./overlay-exif.py sample-images/sample1.jpg --config custmized-config.yaml
+``` 
 
 # References
 

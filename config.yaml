@@ -1,0 +1,6 @@
+overlay-exif:
+  text: |
+    %(DateTimeOriginal)s
+    f/%(FNumber)s %(ExposureTime)s %(FocalLength)smm ISO:%(ISOSpeedRatings)s ExBias:%(ExposureBiasValue)s
+    %(Make)s %(Model)s (%(LensMake)s %(LensModel)s)
+  font-file: "/Library/Fonts/Arial Black.ttf"
