@@ -7,6 +7,7 @@ import os
 import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
+from datetime import datetime
 
 from exiftools import exifutils
 
@@ -55,7 +56,7 @@ def __insert_exif_overlay_to_image(image_file_path, debug_print, output_dir=None
         # TODO Configurable overlay.
         exif_text = """
 %(DateTimeOriginal)s
-f/%(FNumber)s %(ExposureTime)s %(FocalLength)smm ISO:%(ISOSpeedRatings)s ExBias:%(ExposureBiasValue)s SS:%(ShutterSpeedValue)s
+f/%(FNumber)s %(ExposureTime)s %(FocalLength)smm ISO:%(ISOSpeedRatings)s ExBias:%(ExposureBiasValue)s
 %(Make)s %(Model)s (%(LensMake)s %(LensModel)s)
             """.strip() % {
                 'ExposureBiasValue': exif_info.get('ExposureBiasValue'),
@@ -67,8 +68,8 @@ f/%(FNumber)s %(ExposureTime)s %(FocalLength)smm ISO:%(ISOSpeedRatings)s ExBias:
                 'LensModel': exif_info.get('LensModel'),
                 'Make': exif_info.get('Make'),
                 'Model': exif_info.get('Model'),
-                'ShutterSpeedValue': exif_info.get('ShutterSpeedValue'),  # TODO math.log2(exif_info.get('ShutterSpeedValue')),
-                'DateTimeOriginal': exif_info.get('DateTimeOriginal'), # TODO to Local time.
+                # 'ShutterSpeed': exif_info.get('ShutterSpeedValue'),  # TODO math.log2(exif_info.get('ShutterSpeedValue')),
+                'DateTimeOriginal': datetime.strptime(exif_info.get('DateTimeOriginal'), '%Y:%m:%d %H:%M:%S').strftime("%Y/%m/%d %H:%M:%S"), # TODO to Local time.
             }
         print("--- Exif info ---")
         print("%s" % exif_text)
