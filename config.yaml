@@ -1,6 +1,11 @@
 overlay-exif:
+  # Overlay text to insert in a image.
+  # - printf style template.
+  # - See overlay-exif.py for available variables.
   text: |
     %(DateTimeOriginal)s
     f/%(FNumber)s %(ExposureTime)s %(FocalLength)smm ISO:%(ISOSpeedRatings)s ExBias:%(ExposureBiasValue)s
     %(Make)s %(Model)s (%(LensMake)s %(LensModel)s)
+
+  # Path for font file use in overlay text.
   font-file: "/Library/Fonts/Arial Black.ttf"
