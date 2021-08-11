@@ -3,27 +3,36 @@ Exif Tools
 
 Command line tools for manipulate Exif(Exchangeable image file format) information. 
 
-![overlay-exif](https://github.com/crossroad0201/exif-tools/raw/main/overlay-sample.jpg)
-
 Features...
 * Show Exif.
 * Insert Exif overlay.
+
+![overlay-exif](https://github.com/crossroad0201/exif-tools/raw/main/overlay-sample.jpg)
 
 # Setup
 
 ## Requirements
 
 * Python 3.x
-* Git
 
 * **Only tested on a Mac OS.**
 
-## Clone this repository.
+## Get the code
+
+Get the code via Git clone or download from Github.
+
+### Git clone
 
 ```
 > git clone https://github.com/crossroad0201/exif-tools.git
 > cd exif-tools
 ```
+
+### Download from Github
+
+* Download from `Code > Download ZIP` .
+* Unzip downloaded ZIP file to any place. (Ex. /User/Your name/Desktop/exif-tools-main)
+* Open terminal and move to unzipped place.
 
 ## Install require modules
 
@@ -44,7 +53,7 @@ Show Exif information as JSON format.
 ```
 
 ```
-> show-exif sample-images/sample1.jpg
+> ./show-exif sample-images/sample1.jpg
 {
   "FileName": "sample1.jpg",
   "Exif": {
@@ -64,7 +73,7 @@ Show Exif information as JSON format.
   }
 }
 
-> python show-exif sample-images
+> ./show-exif sample-images
 [
   {
     "FileName": "sample1.jpg",
