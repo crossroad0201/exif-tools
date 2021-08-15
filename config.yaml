@@ -9,3 +9,6 @@ overlay-exif:
 
   # Path for font file use in overlay text.
   font-file: "/Library/Fonts/Arial Black.ttf"
+
+  # Suffix for output file name. Ex.sample[SUFFIX].jpg
+  output-file-name-suffix: _exif

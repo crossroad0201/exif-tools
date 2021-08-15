@@ -13,7 +13,6 @@ from datetime import datetime
 from exiftools import exifutils
 
 font_color = (255, 255, 255)
-output_file_name_suffix = '_exif'
 
 
 def __insert_text_to_image(config, image_file_path, insert_text, debug_print):
@@ -80,6 +79,7 @@ def __insert_exif_overlay_to_image(config, image_file_path, debug_print, output_
         index_of_file_ext = os.path.basename(image_file_path).rindex(".")
         file_name_without_file_ext = os.path.basename(image_file_path)[:index_of_file_ext]
         file_ext = os.path.splitext(image_file_path)[1]
+        output_file_name_suffix = config['overlay-exif']['output-file-name-suffix']
         output_file_name = "%s%s%s" % (file_name_without_file_ext, output_file_name_suffix, file_ext)
 
         output_file_path = os.path.join(output_dir, output_file_name)
