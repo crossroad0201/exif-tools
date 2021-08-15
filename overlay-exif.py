@@ -88,7 +88,7 @@ def __insert_exif_overlay_to_image(config, image_file_path, debug_print, output_
         cv2.imwrite(output_file_path, output_image)
         print("Done.")
     else:
-        print("Exif information not included. Skipped.")
+        raise Exception("Exif information not included.")
 
 
 if __name__ == '__main__':
@@ -114,11 +114,14 @@ if __name__ == '__main__':
             output_dir=args.output_dir
         )
     else:
-        for path_for_file in glob.glob(args.input_path + "/*"):
-            __insert_exif_overlay_to_image(
-                config,
-                path_for_file,
-                debug_print=args.debug,
-                output_dir=args.output_dir
-            )
+        for path_for_file in filter(lambda x: os.path.isfile(x), glob.glob(args.input_path + "/*")):
+            try:
+                __insert_exif_overlay_to_image(
+                    config,
+                    path_for_file,
+                    debug_print=args.debug,
+                    output_dir=args.output_dir
+                )
+            except Exception as e:
+                print("[SKIP] %s" % e)
             print("")
